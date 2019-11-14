@@ -4,7 +4,7 @@
 #include <time.h>
 #include <math.h>
 
-#define MAX_ITER 16001
+#define MAX_ITER 32001
 #define MIN_ITER 250
 #define K 1000
 #define TAM 256000
@@ -79,21 +79,21 @@ void quitarMenor(monticulo *m){
 */
 void ord_mont(int v [], int n){
   int i;
-  monticulo m;
-  crearMonticulo (v,n, &m);
+  monticulo * m = malloc(sizeof(monticulo));
+  crearMonticulo (v,n, m);
   for(i=0 ; i<n ; i++){
-    v[i] = consultarMenor(&m);
-
-    quitarMenor(&m);
+    v[i] = consultarMenor(m);
+    quitarMenor(m);
   }
-
+  free(m);
 }
 /*
 --------------------------------------------------------------------------------
 */
 void creador(int v[], int n){
-  monticulo m;
-  crearMonticulo(v,n,&m);
+  monticulo * m = malloc(sizeof(monticulo));
+  crearMonticulo(v,n,m);
+  free(m);
 }
 /*
 --------------------------------------------------------------------------------

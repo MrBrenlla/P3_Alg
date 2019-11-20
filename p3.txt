@@ -1,0 +1,170 @@
+Título: Práctica 2 de Algoritmos "Ordenación por inserción y ordenación shell"
+
+Brais García Brenlla
+Ángel Álvarez Rey
+
+Os test foron realizados con unha máquina con estas especificacións:
+
+OS:
+  Ubuntu 18.04.3 LTS
+CPU:
+  Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+  1 physical processor; 4 cores; 8 threads
+RAM:
+  16376964 KiB
+
+---------------------------------INTRODUCCIÓN-----------------------------------
+
+Neste exercicio medimos os tempos de execución do algoritmo ordenador de
+montículos. Previamente comprobamos se a funcion crearMonticulo funciona
+correctamente; Posteriormente comprobamos se ao introducir un
+vector aleatorio se devolve ben ordenado e facemos o mesmo para un vector
+descendente; Finalmente comprobamos se a complexidade de crearMonticulo é O(n) e
+calculamos empíricamente a complexidade do algoritmo para 3 situacións iniciais
+(vector ascendente, vector desdencente e vector aleatorio).
+
+
+Para esta práctica debemos ter en conta:
+
+1.-O tempo estará sempre medido en microsegundos.
+
+2.-Aquelas filas marcadas por '*' estarán medidas con respecto a 1000 iteracións,
+   pois o tempo de cada iteración é menor de 500 microsegundos e sería inexacto
+   debido ás aproximacións.
+
+3.-No caso de apareceren valores anómalos serán indicados neste arquivo.
+
+4.-As columnas representan o valor aplicado á función, o tempo medido, unha cota
+   subestimada, outra axustada e outra sobreestimada respectivamente.
+
+5.-Os valores aplicados á función son resultado dunha progresión xeométrica de
+   de razón 2 empezando en 250.
+
+6.-O programa debe ser compilado co argumento -lm para funcionar correctamente.
+
+Agora imos analizar as táboas que conteñen os datos aos que se aplica cada
+función, tempo de execución e cotas.
+
+
+
+
+-----------------------Comprobación da complexidade-----------------------------
+                            de crearMonticulo
+
+Monticulo de minimos de un vector aleatorio
+
+               n            t(n)     t(n)/n^0.85          t(n)/n      t(n)/n^1.2
+            250*           4.514        0.041334        0.018056        0.010395
+            500*           9.539        0.048459        0.019078        0.010248
+           1000*          19.556        0.055116        0.019556        0.009801
+           2000*          38.157        0.059662        0.019078        0.008922
+           4000*          74.127        0.064302        0.018532        0.008086
+           8000*         145.099        0.069829        0.018137        0.007384
+          16000*         287.519        0.076765        0.017970        0.006826
+          32000          670.000        0.099242        0.020938        0.007420
+          64000         1167.000        0.095900        0.018234        0.006029
+
+ANOMALÍAS:-
+
+Cota subestimada: pow(n,0.85)
+Cota axustada: n
+Cota sobreestimada: pow(n,1.2)
+
+Observacións:
+1.- Os resultados da columna da cota subestimada tenden a infinito.
+2.- Os resultados da cota axustada atópanse no intervalo [0.017970,0.020938].
+3.- Os resultados da cota sobreestimada tenden a 0.
+
+Como se pode observar, o algoritmo ten unha complexidade de O(n).
+
+-----------------------Comprobación da complexidade-----------------------------
+                              da ordenación
+
+Ordenacion de un vector ordenado
+
+               n            t(n)     t(n)/n^1.05   t(n)/n*log(n)      t(n)/n^1.3
+            250*          16.277        0.049401        0.011792        0.012424
+            500*          42.216        0.061881        0.013586        0.013086
+           1000*         102.282        0.072410        0.014807        0.012877
+           2000*         237.037        0.081047        0.015593        0.012119
+           4000          567.000        0.093631        0.017091        0.011773
+           8000         1110.000        0.088528        0.015439        0.009361
+          16000         2307.000        0.088863        0.014895        0.007901
+          32000         4943.000        0.091957        0.014891        0.006875
+          64000        10851.000        0.097495        0.015321        0.006130
+
+ANOMALÍAS:-
+
+Cota subestimada: pow(n,1.05)
+Cota axustada: n*log(n)
+Cota sobreestimada: pow(n,1.3)
+
+Observacións:
+1.- Os resultados da columna da cota subestimada tenden a infinito.
+2.- Os resultados da cota axustada atópanse no intervalo [0.011792,0.017091].
+3.- Os resultados da cota sobreestimada tenden a 0.
+
+
+
+Ordenacion de un vector inversamente ordenado
+
+               n            t(n)     t(n)/n^1.05   t(n)/n*log(n)      t(n)/n^1.3
+            250*          19.771        0.060006        0.014323        0.015091
+            500*          49.317        0.072290        0.015871        0.015287
+           1000*         113.327        0.080229        0.016406        0.014267
+           2000*         253.535        0.086687        0.016678        0.012963
+           4000          757.000        0.125007        0.022818        0.015719
+           8000         1130.000        0.090123        0.015717        0.009529
+          16000         2360.000        0.090905        0.015237        0.008083
+          32000         4921.000        0.091547        0.014824        0.006845
+          64000        11948.000        0.107351        0.016869        0.006749
+
+ANOMALÍAS: Na primeira fila na que t(n) deixa de ser menor de 500 os resultados
+son anómalos, polo que os irgnoramos.
+
+Cota subestimada: pow(n,1.05)
+Cota axustada: n*log(n)
+Cota sobreestimada: pow(n,1.3)
+
+Observacións:
+1.- Os resultados da columna da cota subestimada tenden a infinito.
+2.- Os resultados da cota axustada atópanse no intervalo [0.014323,0.016678].
+3.- Os resultados da cota sobreestimada tenden a 0.
+
+
+
+Ordenacion de un vector aleatorio
+
+               n            t(n)     t(n)/n^1.05   t(n)/n*log(n)      t(n)/n^1.3
+            250*          27.612        0.083803        0.020003        0.021075
+            500*          61.677        0.090408        0.019849        0.019119
+           1000*         136.740        0.096805        0.019795        0.017215
+           2000*         295.738        0.101117        0.019454        0.015121
+           4000          642.000        0.106016        0.019351        0.013331
+           8000         1352.000        0.107828        0.018805        0.011401
+          16000         2988.000        0.115095        0.019292        0.010234
+          32000         6993.000        0.130094        0.021066        0.009727
+          64000        15032.000        0.135060        0.021224        0.008491
+
+ANOMALÍAS:-
+
+Cota subestimada: pow(n,1.05)
+Cota axustada: n*log(n)
+Cota sobreestimada: pow(n,1.3)
+
+Observacións:
+1.- Os resultados da columna da cota subestimada tenden a infinito.
+2.- Os resultados da cota axustada atópanse no intervalo [0.019351,0.021224].
+3.- Os resultados da cota sobreestimada tenden a 0.
+
+-----------------------------------CONCLUSIÓN-----------------------------------
+
+Para esta práctica tívose que facer uso de repetición da función en gran parte das
+probas, pois o segundo código necesita un vector moi grande para superar
+os 500 microsegundos.
+
+Dados estes resultados deducimos que o segundo codigo é mais rapido e eficiente
+na maioria dos casos, pero nos casos onde o vector xa estea maioritariamente
+ordenado será mellor  o primeiro, pois si será mais rápido. A principal causa
+desto é que o primeiro algoritmo cambia a súa complexidade dependendo da ordenación
+do vector, mentres que o segundo é mais constante.

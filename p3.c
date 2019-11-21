@@ -60,7 +60,7 @@ void afundir(monticulo * m, int n){
   pos=n*2+1;
   if(pos+1<m->nodos){
     if (m->datos[pos+1]<m->datos[pos]) ++pos;
-     min=m->datos[pos];
+    min=m->datos[pos];
   }
   else if(pos<m->nodos) min = m->datos[pos];
   if(pos<m->nodos){
@@ -79,9 +79,7 @@ void crearMonticulo(int v[], int n, monticulo *m){
   int i;
   m->nodos=n;
   for (i=0; i<n;i++) m->datos[i]=v[i];
-  for(i = (n-2)/2; i>-1; i--){
-    afundir(m,i);
-  }
+  for(i = (n-2)/2; i>-1; i--) afundir(m,i);
 }
 /*
 --------------------------------------------------------------------------------
@@ -161,7 +159,6 @@ void ord_mont(int v [], int n){
   crearMonticulo (v,n, m);
   for(i=0 ; i<n ; i++){
     v[i] = consultarMenor(m);
-
     quitarMenor(m);
   }
   free(m);
@@ -179,8 +176,7 @@ void creador(int v[], int n){
 */
 double microsegundos() { /* obtiene la hora del sistema en microsegundos */
 struct timeval t;
-if (gettimeofday(&t, NULL) < 0 )
-return 0.0;
+if (gettimeofday(&t, NULL) < 0 ) return 0.0;
 return (t.tv_usec + t.tv_sec * 1000000.0);
 }
 /*
@@ -253,12 +249,12 @@ double cotainf, double cotaax, double cotasup){
 */
 void crear(){
   int h;
-    printf("\nMonticulo de minimos de un vector aleatorio\n\n");
-    printf("%16s %15s %15s %15s %15s\n", "n","t(n)","t(n)/n^0.85", "t(n)/n",
-     "t(n)/n^1.1");
-    for ( h = MIN_ITER; h<MAX_ITER ; h = h*2){
-       tempos(h,creador,aleatorio,pow(h,0.85),h,pow(h,1.1));
-     }
+  printf("\nMonticulo de minimos de un vector aleatorio\n\n");
+  printf("%16s %15s %15s %15s %15s\n", "n","t(n)","t(n)/n^0.85", "t(n)/n",
+    "t(n)/n^1.1");
+  for ( h = MIN_ITER; h<MAX_ITER ; h = h*2){
+    tempos(h,creador,aleatorio,pow(h,0.85),h,pow(h,1.1));
+  }
 }
 /*
 --------------------------------------------------------------------------------
@@ -266,20 +262,20 @@ void crear(){
 void ordenar(){
   int h;
   printf("\nOrdenacion de un vector ordenado\n\n");
-  printf("%16s %15s %15s %15s %15s\n", "n","t(n)", "t(n)/n^1.05", "t(n)/n*log(n)",
-   "t(n)/n^1.3");
+  printf("%16s %15s %15s %15s %15s\n", "n","t(n)", "t(n)/n^1.05",
+  "t(n)/n*log(n)","t(n)/n^1.3");
   for ( h = MIN_ITER; h<MAX_ITER ; h = h*2){
      tempos(h,ord_mont,ascendente,pow(h,1.05),h*log(h),pow(h,1.3));
    }
    printf("\nOrdenacion de un vector inversamente ordenado\n\n");
-   printf("%16s %15s %15s %15s %15s\n", "n","t(n)", "t(n)/n^1.05", "t(n)/n*log(n)",
-    "t(n)/n^1.3");
+   printf("%16s %15s %15s %15s %15s\n", "n","t(n)","t(n)/n^1.05",
+    "t(n)/n*log(n)","t(n)/n^1.3");
    for ( h = MIN_ITER; h<MAX_ITER ; h = h*2){
       tempos(h,ord_mont,descendente,pow(h,1),h*log(h),pow(h,1.3));
     }
     printf("\nOrdenacion de un vector aleatorio\n\n");
-    printf("%16s %15s %15s %15s %15s\n", "n","t(n)","t(n)/n^1.05", "t(n)/n*log(n)",
-     "t(n)/n^1.3");
+    printf("%16s %15s %15s %15s %15s\n", "n","t(n)","t(n)/n^1.05",
+      "t(n)/n*log(n)","t(n)/n^1.3");
     for ( h = MIN_ITER; h<MAX_ITER ; h = h*2){
        tempos(h,ord_mont,aleatorio,pow(h,1.05),h*log(h),pow(h,1.3));
      }
@@ -289,26 +285,26 @@ void ordenar(){
 */
 int main(){
   inicializar_semilla();
-  printf("A función crearMonticulo funciona %s\n",probaCrear());
+  printf("A funcion crearMonticulo funciona %s\n",probaCrear());
   printf("\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-  printf("A función ord_mont funciona %s\n",probaOrd1());
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("A funcion ord_mont funciona %s\n",probaOrd1());
   printf("\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-  printf("A función ord_mont funciona %s\n",probaOrd2());
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("A funcion ord_mont funciona %s\n",probaOrd2());
 
 
   printf("\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
   crear();
   ordenar();
 
   printf("\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
-  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
+  printf("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
   crear();
   ordenar();
  }
